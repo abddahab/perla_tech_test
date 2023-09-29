@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:perla_tech/features/domin/models/user_model.dart';
 
-import '../../../domin/entities/user.dart';
+
 
 part 'login_event.dart';
 part 'login_state.dart';

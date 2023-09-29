@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../domin/entities/user.dart';
+import '../../../domin/models/user_model.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';

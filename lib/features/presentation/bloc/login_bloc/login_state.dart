@@ -12,8 +12,8 @@ class LoginLoadingState extends LoginState{
 
 class LoginSuccessState extends LoginState{
   final String token;
-  final User user;
-  LoginSuccessState({required this.token , required this.user});
+  final LoginModel loginModel;
+  LoginSuccessState({required this.token , required this.loginModel});
 
 
 }
