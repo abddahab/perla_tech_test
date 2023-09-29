@@ -1,0 +1,33 @@
+
+{
+
+"welcomeBack": "Welcome back!",
+"enterYourDataToContinue": "Enter your data to continue.",
+"phoneNumber": "Phone number",
+"enterYourPhoneNumber": "Enter your phone number",
+"password": "Password",
+"enterYourPassword": "Enter your password",
+"login": "Login",
+"dontHaveAnAccount": "Don't have an account?",
+"createAccount": "Create account!",
+"registerToGetStarted": "Register to get started.",
+"fullName": "Full name",
+"enterYourName": "Enter your name",
+  "confirmPassword": "Confirm password",
+  "repeatYourPassword": "Repeat your password",
+  "register": "Register",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "enterYourText": "Enter your text",
+  "add": "Add",
+  "text": "Text",
+  "date": "Date",
+  "userName": "User name",
+  "darkMode": "Dark mode",
+  "arabicEnglish": "Arabic/English",
+  "logout": "Logout",
+  "yourNameCantBeEmpty" : "Your name can't be empty",
+  "phoneNumberCantBeEmpty" : "Phone number can't be empty",
+  "passwordCantBeEmpty" : "Password can't be empty"
+
+
+}
