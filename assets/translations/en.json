@@ -27,7 +27,10 @@
   "logout": "Logout",
   "yourNameCantBeEmpty" : "Your name can't be empty",
   "phoneNumberCantBeEmpty" : "Phone number can't be empty",
-  "passwordCantBeEmpty" : "Password can't be empty"
+  "passwordCantBeEmpty" : "Password can't be empty",
+  "noteCantBeEmpty" : "Note Can't Be Empty",
+  "editNote" : "Edit Note",
+  "cancel" : "cancel"
 
 
 }

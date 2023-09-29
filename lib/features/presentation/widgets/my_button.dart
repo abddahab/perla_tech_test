@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:perla_tech/core/color/color_manger.dart';
 
 
 class MyButton extends StatelessWidget {
@@ -17,14 +18,15 @@ class MyButton extends StatelessWidget {
       height: 48.h,
       width: width?? 342.w,
       decoration: BoxDecoration(
-        color: Color(0xFF6C63FF),
+        color: ColorManger.primary,
         borderRadius: BorderRadius.all(Radius.circular(12.r)),
       ),
 
       child: ElevatedButton(
         onPressed:onPressed,
         child: Text('${text}',
-          style: TextStyle(fontSize: 16.sp ,fontWeight: FontWeight.w500 , color: Color(0xFFFFFFFF)),),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
       ),
     );
   }

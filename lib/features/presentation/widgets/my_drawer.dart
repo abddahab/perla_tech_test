@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:perla_tech/core/app_cache.dart';
 import 'package:perla_tech/core/strings/app_strings.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -25,7 +27,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
             Row(children: [
               Icon(Icons.brightness_4_sharp),
-              Text(AppStrings.darkMode, style:Theme.of(context).textTheme.titleMedium),
+              Text(AppStrings().darkMode, style:Theme.of(context).textTheme.titleMedium),
               IconButton(
                   onPressed: (){}, icon: Icon(Icons.smart_button_outlined)),
             ],),
@@ -33,8 +35,15 @@ class _MyDrawerState extends State<MyDrawer> {
             Row(children: [
               Icon(Icons.language_outlined),
               TextButton(
-                  onPressed: (){},
-                  child: Text(AppStrings.arabicEnglish , style: Theme.of(context).textTheme.titleMedium, )
+                  onPressed: () async {
+
+                    Locale locale = await  AppCache().setAppLanguage();
+                    if(mounted) {
+                      context.setLocale(locale);
+                    }
+
+                  },
+                  child: Text(AppStrings().arabicEnglish , style: Theme.of(context).textTheme.titleMedium, )
               ),
             ],),
             SizedBox(height: 25,),
@@ -43,7 +52,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Icon(Icons.logout),
                 TextButton(
                     onPressed: (){},
-                    child: Text(AppStrings.logout , style: Theme.of(context).textTheme.titleMedium,)),
+                    child: Text(AppStrings().logout , style: Theme.of(context).textTheme.titleMedium,)),
               ],
             ),
 

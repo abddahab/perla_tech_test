@@ -39,12 +39,12 @@ class MyTextFormField extends StatelessWidget {
         validator: validate,
         obscureText: isPassword??  false,
         decoration:InputDecoration(
-          labelText: lable,
+          hintText: lable,
           prefixIcon: Icon(prefix) ,
           suffixIcon: suffix != null? IconButton(icon: Icon(suffix),onPressed:suffixPressed ,) : null,
           contentPadding: EdgeInsets.symmetric(vertical: 14.w , horizontal: 52.h),
         )
-    ).whithSize(width: 342.w, height: 48.h) ;
+    );
   }
 }
 

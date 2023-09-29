@@ -25,5 +25,8 @@
   "logout": "تسجيل الخروج",
   "yourNameCantBeEmpty" : "لا يمكن ان يكون الاسم فارغا" ,
   "phoneNumberCantBeEmpty" : "لايمكن ان يكون رقم الموبايل فارغا",
-  "passwordCantBeEmpty" : "لايمكن ان تكون كلمة المرور فارغة"
+  "passwordCantBeEmpty" : "لايمكن ان تكون كلمة المرور فارغة",
+  "noteCantBeEmpty" : "لايمكن اضافة ملاحظة فارغة",
+  "editNote" : " تعديل ملاحظة",
+  "cancel" : "الغاء"
 }

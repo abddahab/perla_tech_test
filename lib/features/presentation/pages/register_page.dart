@@ -5,14 +5,24 @@ import 'package:perla_tech/core/strings/app_strings.dart';
 import 'package:perla_tech/features/presentation/widgets/my_button.dart';
 import 'package:perla_tech/features/presentation/widgets/my_text_form_field.dart';
 
-class RegisterPage extends StatelessWidget {
-  final _nameController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
-  final  _passwordController = TextEditingController();
-  final  _confirmPasswordController = TextEditingController();
-  final  _formKey = GlobalKey<FormState>();
+class RegisterPage extends StatefulWidget {
 
   RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final _nameController = TextEditingController();
+
+  final _phoneNumberController = TextEditingController();
+
+  final  _passwordController = TextEditingController();
+
+  final  _confirmPasswordController = TextEditingController();
+
+  final  _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +36,17 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      label: Text("gelllo"),
-                    ),
-                  ),
                   SizedBox(height: 96.h),
-                  Text(AppStrings.createAccount ,
+                  Text(AppStrings().createAccount ,
                     style: Theme.of(context).textTheme.bodyLarge,),
                   SizedBox(height: 4.h,),
                   Text(
-                    AppStrings.registerToGetStarted,
+                    AppStrings().registerToGetStarted,
                     style:ThemeData.light().textTheme.bodyMedium,
                   ),
                   SizedBox(height: 48.h),
                   Text(
-                      AppStrings.fullName,
+                      AppStrings().fullName,
                     style: Theme.of(context).textTheme.titleMedium),
                   SizedBox(height: 12.h,),
                   MyTextFormField(
@@ -49,16 +54,16 @@ class RegisterPage extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       validate: (value){
                         if(value!.isEmpty){
-                          return AppStrings.yourNameCantBeEmpty;
+                          return AppStrings().yourNameCantBeEmpty;
                         }
                         return null;
                       },
-                      lable: AppStrings.enterYourName,
+                      lable: AppStrings().enterYourName,
                       prefix: Icons.account_circle
                   ),
                   SizedBox(height:24.h),
                   Text(
-                    AppStrings.phoneNumber,
+                    AppStrings().phoneNumber,
                     style: Theme.of(context).textTheme.labelMedium ,
                   ),
                   SizedBox(height: 12.h,),
@@ -67,16 +72,16 @@ class RegisterPage extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                       validate: (value){
                         if(value!.isEmpty){
-                          return  AppStrings.phoneNumberCantBeEmpty;
+                          return  AppStrings().phoneNumberCantBeEmpty;
                         }
                         return null;
                       },
-                      lable:  AppStrings.enterYourPhoneNumber,
+                      lable:  AppStrings().enterYourPhoneNumber,
                       prefix: Icons.phone
                   ),
                   SizedBox(height:24.h),
                   Text(
-                    AppStrings.password,
+                    AppStrings().password,
                     style:Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(height: 12.h,),
@@ -85,18 +90,18 @@ class RegisterPage extends StatelessWidget {
                     keyboardType: TextInputType.visiblePassword,
                     validate: (value){
                       if(value!.isEmpty){
-                        return  AppStrings.passwordCantBeEmpty;
+                        return  AppStrings().passwordCantBeEmpty;
                       }
                       return null;
                     },
-                    lable: AppStrings.enterYourPassword,
+                    lable: AppStrings().enterYourPassword,
                     prefix: Icons.lock_outline,
                     isPassword: true ,
                     suffix:Icons.visibility_off,
                   ),
                   SizedBox(height:24.h),
                   Text(
-                    AppStrings.confirmPassword,
+                    AppStrings().confirmPassword,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   SizedBox(height: 12.h,),
@@ -105,11 +110,11 @@ class RegisterPage extends StatelessWidget {
                     keyboardType: TextInputType.visiblePassword,
                     validate: (value){
                       if(value!.isEmpty){
-                        return  AppStrings.passwordCantBeEmpty;
+                        return  AppStrings().passwordCantBeEmpty;
                       }
                       return null;
                     },
-                    lable: AppStrings.repeatYourPassword,
+                    lable: AppStrings().repeatYourPassword,
                     prefix: Icons.lock_outline,
                     isPassword: true ,
                     suffix:Icons.visibility_off,
@@ -117,17 +122,17 @@ class RegisterPage extends StatelessWidget {
                   SizedBox(height: 158.h),
                   MyButton(
                     onPressed: (){},
-                    text:  AppStrings.register),
+                    text:  AppStrings().register),
 
                   SizedBox(height: 12.h,),
                   Row(
                     children: [
-                      Text( AppStrings.alreadyHaveAnAccount,
+                      Text( AppStrings().alreadyHaveAnAccount,
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                       TextButton(
                           onPressed: (){},
-                          child:Text (AppStrings.login)
+                          child:Text (AppStrings().login)
                       ),
                     ],
                   ),

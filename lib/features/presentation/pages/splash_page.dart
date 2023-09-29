@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
 
   _navigateToHome()async{
     await Future.delayed(Duration(seconds: 1),(){});
-    context.goNamed(AppRouter.register);
+    context.goNamed(AppRouter.home);
   }
 
   @override

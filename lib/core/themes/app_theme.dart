@@ -34,6 +34,11 @@ final ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w400,
       color: ColorManger.black,
     ),
+    labelLarge: TextStyle(
+      fontSize: 16.sp ,
+      fontWeight: FontWeight.w500,
+      color: ColorManger.white,
+    ),
     bodySmall: TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
@@ -52,11 +57,12 @@ final ThemeData lightTheme = ThemeData(
   ),
 
   inputDecorationTheme: InputDecorationTheme(
+    contentPadding: EdgeInsets.symmetric(horizontal: 24.w , vertical: 14.h),
     filled: true,
-    border: OutlineInputBorder(borderSide:BorderSide(color: ColorManger.borderColor) , borderRadius: BorderRadius.all(Radius.circular(8.r)) ),
+    border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(8.r)) ),
     errorBorder: OutlineInputBorder(borderSide: BorderSide(color:  ColorManger.red)),
     fillColor: ColorManger.borderColor,
-    labelStyle: TextStyle(
+    hintStyle: TextStyle(
     fontSize: 16.sp ,
     fontWeight: FontWeight.w500,
     color: ColorManger.gry,
