@@ -13,9 +13,8 @@ class RegisterLoadingState extends RegisterState{
 }
 
 class RegisterSuccessState extends RegisterState{
-  final String token;
   final RegisterModel registerModel;
-    RegisterSuccessState({required this.token , required this.registerModel});
+    RegisterSuccessState({ required this.registerModel});
 
 
 }

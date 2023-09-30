@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:perla_tech/core/strings/app_strings.dart';
+import 'package:perla_tech/features/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:perla_tech/features/presentation/widgets/my_button.dart';
 import 'package:perla_tech/features/presentation/widgets/my_text_form_field.dart';
 
@@ -93,8 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                           style :Theme.of(context).textTheme.displayMedium,
                         ),
                         TextButton(
-                            onPressed: (){},
-                            child:Text("register".tr(),),)
+                            onPressed: (){
+
+                              BlocProvider.of<LoginBloc>(context).add(LoginEventRequest(phone: _phoneNumberController.text, password: _passwordController.text));
+
+                            },
+                            child:Text(AppStrings().login.tr(),),)
                       ],
                     ),
                     SizedBox(height: 32.h,)

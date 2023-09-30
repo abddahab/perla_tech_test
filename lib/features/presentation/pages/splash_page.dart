@@ -22,11 +22,14 @@ class _SplashPageState extends State<SplashPage> {
 
   _navigateToHome()async{
     await Future.delayed(Duration(seconds: 1),(){});
-    context.goNamed(AppRouter.home);
+    context.goNamed(AppRouter.register);
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return const Scaffold(
       body: Center(
         child: Image(image: AssetImage("assets/images/logo.png")),

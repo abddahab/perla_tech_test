@@ -6,9 +6,11 @@ import 'package:perla_tech/core/language_manager.dart';
 import 'package:perla_tech/core/router/router.dart';
 import 'package:perla_tech/core/themes/app_theme.dart';
 import 'package:perla_tech/core/themes/app_theme_dark.dart';
+import 'package:perla_tech/features/presentation/bloc/login_bloc/login_bloc.dart';
 
 import 'core/app_cache.dart';
 import 'features/presentation/bloc/note_bloc/note_bloc.dart';
+import 'features/presentation/bloc/register_bloc/register_bloc.dart';
 
 
 void main() async {
@@ -39,20 +41,30 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
     appCache.getAppLanguage().then(
             (value) {
-             if(value == arabic){
-               context.setLocale(arabicLocal);
-             }else{
-               context.setLocale(englishLocal);
-             }
-            });
+          if (value == arabic) {
+            context.setLocale(arabicLocal);
+          } else {
+            context.setLocale(englishLocal);
+          }
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (_, child) =>
-          BlocProvider(
-            create: (context) => NoteBloc(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => NoteBloc(),
+              ),
+              BlocProvider(
+                create: (context) => RegisterBloc(),
+              ),
+              BlocProvider(
+                  create: (context) => LoginBloc(),
+              ),
+            ],
             child: MaterialApp.router(
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,

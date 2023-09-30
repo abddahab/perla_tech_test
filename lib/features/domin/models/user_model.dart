@@ -42,13 +42,13 @@ class Data {
 }
 
 class User {
-  int id;
-  String username;
-  int points;
-  String phone;
-  String imagePath;
-  DateTime timestamp;
-  String userType;
+  int? id;
+  String? username;
+  int? points;
+  String? phone;
+  String? imagePath;
+  DateTime? timestamp;
+  String? userType;
 
   User({
     required this.id,
@@ -76,7 +76,7 @@ class User {
     "points": points,
     "phone": phone,
     "image_path": imagePath,
-    "timestamp": timestamp.toIso8601String(),
+    "timestamp": timestamp?.toIso8601String(),
     "user_type": userType,
   };
 }

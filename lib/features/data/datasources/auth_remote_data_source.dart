@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:perla_tech/core/network/network_info.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '';
 import '../../domin/models/failure_model.dart';
 import '../../domin/models/user_model.dart';
@@ -17,8 +19,15 @@ abstract class AuthRemoteDataSource{
 const BASE_URL = 'https://talebadmin.perla-tech.com';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
-
-  final Dio dio = Dio() ;
+  Dio dio() {
+    Dio dio = Dio();
+    dio.interceptors.add(PrettyDioLogger(
+      request: true,
+      requestBody: true,
+      responseBody: true,
+    ));
+    return dio;
+  }
 
 
   @override
@@ -28,16 +37,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
       "phone": phoneNumber,
       "password": password
     };
-    final response = await dio.post(BASE_URL + "/test/register", data: data);
-    if (response.statusCode == 200) {
-      final decodedJson = json.decode(response.data);
-      final RegisterModel userModel = RegisterModel.fromJson(decodedJson);
-      return Right(userModel);
-    } else {
-      final decodedJson = json.decode(response.data);
-      final FailureModel failureModel = FailureModel.fromJson(decodedJson);
-      return Left(failureModel);
-    }
+
+
+
+      try{
+        final response = await dio().post(BASE_URL + "/test/register", data: data);
+        if (response.statusCode == 200) {
+          final RegisterModel userModel = RegisterModel.fromJson(response.data);
+          return Right(userModel);
+        } else {
+          final FailureModel failureModel = FailureModel.fromJson(response.data);
+          return Left(failureModel);
+        }
+      } catch(e){
+        return Left(FailureModel(data: [] , message: e.toString()));
+      }
+
   }
 
   @override
@@ -47,15 +62,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
      "password" : password
    };
 
-    final response = await dio.post(BASE_URL + "/test/log_in", data: data);
-    final decodedJson = json.decode(response.data);
-    if(response.statusCode == 200) {
-      final LoginModel userModel = LoginModel.fromJson(decodedJson);
-      return Right(userModel);
-    }else {
-      final FailureModel failureModel = FailureModel.fromJson(decodedJson);
-      return Left(failureModel);
-    }
+     try{
+       final response = await dio().post(BASE_URL + "/test/log_in", data: data);
+       final decodedJson = json.decode(response.data);
+       if(response.statusCode == 200) {
+         final LoginModel userModel = LoginModel.fromJson(decodedJson);
+         return Right(userModel);
+       }else {
+         final FailureModel failureModel = FailureModel.fromJson(decodedJson);
+         return Left(failureModel);
+       }
+     }catch(e){
+
+   }
+
+   return left(FailureModel(data: [], message: "check your internet connection"));
+
+
 }
 
   @override

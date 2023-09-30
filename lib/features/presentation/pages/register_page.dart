@@ -1,7 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
+import 'package:perla_tech/core/color/color_manger.dart';
+import 'package:perla_tech/core/router/router.dart';
 import 'package:perla_tech/core/strings/app_strings.dart';
+import 'package:perla_tech/features/presentation/bloc/register_bloc/register_bloc.dart';
 import 'package:perla_tech/features/presentation/widgets/my_button.dart';
 import 'package:perla_tech/features/presentation/widgets/my_text_form_field.dart';
 
@@ -120,9 +126,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     suffix:Icons.visibility_off,
                   ),
                   SizedBox(height: 158.h),
-                  MyButton(
-                    onPressed: (){},
-                    text:  AppStrings().register),
+
+
+
+                  BlocConsumer<RegisterBloc , RegisterState>(
+                    listener: (context, state) {
+                      if(state is RegisterErrorState){
+                        Fluttertoast.showToast(msg: state.message , backgroundColor: ColorManger.red);
+                      }if(state is RegisterSuccessState){
+                        context.goNamed(AppRouter.home);
+                      }
+                    },
+                    builder: (context, state) {
+                      if(state is RegisterLoadingState){
+                        return LinearProgressIndicator();
+                      }else {
+                        return  MyButton(
+                          onPressed: (){
+                            BlocProvider.of<RegisterBloc>(context).add(RegisterEventRequest(name: _nameController.text, phone: _phoneNumberController.text, password: _passwordController.text));
+
+
+                          },
+                          text:  AppStrings().register);
+                      }
+                    },
+
+
+                  ),
+
 
                   SizedBox(height: 12.h,),
                   Row(
@@ -131,8 +162,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
                       TextButton(
-                          onPressed: (){},
-                          child:Text (AppStrings().login)
+                          onPressed: (){
+
+                          },
+                          child:Text (AppStrings().register)
                       ),
                     ],
                   ),
