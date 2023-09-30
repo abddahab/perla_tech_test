@@ -2,10 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
+import 'package:perla_tech/core/router/router.dart';
 import 'package:perla_tech/core/strings/app_strings.dart';
 import 'package:perla_tech/features/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:perla_tech/features/presentation/widgets/my_button.dart';
 import 'package:perla_tech/features/presentation/widgets/my_text_form_field.dart';
+
+import '../../../core/color/color_manger.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -21,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final  _passwordController = TextEditingController();
 
   final  _formKey = GlobalKey<FormState>();
+  bool isPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -79,16 +85,51 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         lable: AppStrings().enterYourPassword,
                         prefix: Icons.lock_outline,
-                        isPassword: true ,
-                      suffix:Icons.visibility_off,
+                      isPassword: isPassword ,
+                      suffix: isPassword ?  Icons.visibility_off : Icons.visibility,
+                      suffixPressed: (){
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      },
                     ),
                     SizedBox(height: 360.h),
-                    MyButton(
-                      onPressed: (){},
-                      text: AppStrings().login,
+
+                    BlocConsumer<LoginBloc , LoginState>(
+                      listener: (context, state) {
+                        if(state is LoginErrorState){
+                          Fluttertoast.showToast(msg: state.message , backgroundColor: ColorManger.red);
+                        }if(state is LoginSuccessState){
+                          context.goNamed(AppRouter.home);
+                        }
+                      },
+                      builder: (context, state) {
+                        if(state is LoginLoadingState){
+                          return LinearProgressIndicator();
+                        }else {
+                          return  MyButton(
+                              onPressed: (){
+
+                                if(_formKey.currentState?.validate()?? false){
+
+
+                                  BlocProvider.of<LoginBloc>(context).add(LoginEventRequest(phone: _phoneNumberController.text, password: _passwordController.text));
+
+
+                                }
+
+
+
+
+                              },
+                              text:  AppStrings().login);
+                        }
+                      },
+
+
                     ),
                     SizedBox(height: 12.h,),
-                    Wrap(
+                    Row(
 
                       children: [
                         Text( AppStrings().dontHaveAnAccount,
@@ -97,10 +138,9 @@ class _LoginPageState extends State<LoginPage> {
                         TextButton(
                             onPressed: (){
 
-                              BlocProvider.of<LoginBloc>(context).add(LoginEventRequest(phone: _phoneNumberController.text, password: _passwordController.text));
-
+                              context.goNamed(AppRouter.register);
                             },
-                            child:Text(AppStrings().login.tr(),),)
+                            child:Text(AppStrings().register.tr(),),)
                       ],
                     ),
                     SizedBox(height: 32.h,)

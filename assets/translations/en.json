@@ -30,7 +30,9 @@
   "passwordCantBeEmpty" : "Password can't be empty",
   "noteCantBeEmpty" : "Note Can't Be Empty",
   "editNote" : "Edit Note",
-  "cancel" : "cancel"
-
+  "cancel" : "cancel",
+  "save" : " save",
+  "invalidPassword" :"invalidPassword",
+  "unexpectedError" : "unexpected error"
 
 }

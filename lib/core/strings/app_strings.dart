@@ -9,7 +9,7 @@ class AppStrings{
   String password = "password".tr();
   String enterYourPassword = "enterYourPassword".tr();
   String login = "login".tr();
-  String dontHaveAnAccount = "dontHaveAnAccountRegister".tr();
+  String dontHaveAnAccount = "dontHaveAnAccount".tr();
   String createAccount = "createAccount".tr();
   String registerToGetStarted = "registerToGetStarted".tr();
   String fullName = "fullName".tr();
@@ -33,6 +33,9 @@ class AppStrings{
   String editNote = "editNote".tr();
   String save = "save".tr();
   String cancel = "cancel".tr();
+  String invalidPassword = "invalidPassword".tr();
+  String unexpectedError = "unexpectedError".tr();
+
 
 }
 

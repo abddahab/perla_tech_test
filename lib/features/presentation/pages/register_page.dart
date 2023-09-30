@@ -29,6 +29,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final  _confirmPasswordController = TextEditingController();
 
   final  _formKey = GlobalKey<FormState>();
+  bool isPassword = true;
+  bool isPasswordConfirm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +104,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     lable: AppStrings().enterYourPassword,
                     prefix: Icons.lock_outline,
-                    isPassword: true ,
-                    suffix:Icons.visibility_off,
+                    isPassword: isPassword ,
+                    suffix: isPassword ?  Icons.visibility_off : Icons.visibility,
+                    suffixPressed: (){
+                      setState(() {
+                        isPassword = !isPassword;
+                      });
+                    },
                   ),
                   SizedBox(height:24.h),
                   Text(
@@ -115,6 +122,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: _confirmPasswordController,
                     keyboardType: TextInputType.visiblePassword,
                     validate: (value){
+
+                      if(_passwordController.text != _confirmPasswordController.text){
+                        return AppStrings().invalidPassword;
+                      }
+
                       if(value!.isEmpty){
                         return  AppStrings().passwordCantBeEmpty;
                       }
@@ -122,12 +134,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     lable: AppStrings().repeatYourPassword,
                     prefix: Icons.lock_outline,
-                    isPassword: true ,
-                    suffix:Icons.visibility_off,
+                    isPassword: isPasswordConfirm ,
+                    suffix: isPasswordConfirm ? Icons.visibility_off : Icons.visibility,
+                    suffixPressed: (){
+                      setState(() {
+                        isPasswordConfirm = !isPasswordConfirm;
+                      });
+                    },
                   ),
                   SizedBox(height: 158.h),
-
-
 
                   BlocConsumer<RegisterBloc , RegisterState>(
                     listener: (context, state) {
@@ -143,7 +158,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       }else {
                         return  MyButton(
                           onPressed: (){
-                            BlocProvider.of<RegisterBloc>(context).add(RegisterEventRequest(name: _nameController.text, phone: _phoneNumberController.text, password: _passwordController.text));
+
+                            if(_formKey.currentState?.validate()?? false){
+
+                              BlocProvider.of<RegisterBloc>(context).add(RegisterEventRequest(name: _nameController.text, phone: _phoneNumberController.text, password: _passwordController.text));
+                            }
+
+
 
 
                           },
@@ -163,9 +184,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextButton(
                           onPressed: (){
-
+                            context.goNamed(AppRouter.login);
                           },
-                          child:Text (AppStrings().register)
+                          child:Text (AppStrings().login)
                       ),
                     ],
                   ),
